@@ -1,0 +1,26 @@
+---
+kafka_ct_name: "kafka-{{ kafka_id }}"
+kafka_ct_image: "confluent/kafka"
+kafka_bind_ip: "{{ kafka_node.bind_ip | default(backnet_ip) }}"
+kafka_port: "{{ kafka_node.port | default(9092) }}"
+
+kafka_ct_restart_policy: "always"
+kafka_ct_state: "started"
+kafka_ct_restart: "{{ ct_restart | default(false) }}"
+kafka_ct_pull: "{{ ct_pull | default(true) }}"
+kafka_ct_recreate: "{{ ct_recreate | default(false) }}"
+
+kafka_srv_dir: "/srv/{{ kafka_ct_name }}"
+kafka_env_file_template: "env.j2"
+kafka_env_file: "{{ kafka_srv_dir }}/env"
+
+# kafka_nodes:
+#   - host: k01
+#     bind_ip: "10.100.20.200"
+#     port: "9092"
+#     id: 1
+#   - host: k02
+#     id: 2
+
+kafka_id: "{{ kafka_node.id }}"
+# kafka_zookeeper_addr: ""

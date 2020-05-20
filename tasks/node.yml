@@ -1,0 +1,29 @@
+---
+
+- name: create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    recurse: true
+  loop:
+    - "{{ kafka_srv_dir }}"
+
+- name: create env file
+  template:
+    src: "{{ kafka_env_file_template }}"
+    dest: "{{ kafka_env_file }}"
+    mode: 0644
+
+- name: kafka container
+  docker_container:
+    name: "{{ kafka_ct_name }}"
+    image: "{{ kafka_ct_image }}"
+    ports:
+      - "{{ kafka_bind_ip }}:{{ kafka_port }}:9092"
+    env_file: "{{ kafka_env_file }}"
+    restart_policy: "{{ kafka_ct_restart_policy }}"
+    state: "{{ kafka_ct_state }}"
+    restart: "{{ kafka_ct_restart }}"
+    pull: "{{ kafka_ct_pull }}"
+    recreate: "{{ kafka_ct_recreate }}"

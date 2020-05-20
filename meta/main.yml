@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: Dmitrii Kashin
+  description: install kafka from docker images
+  role_name: kafka
+  license: MIT
+
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+
+  galaxy_tags:
+    - kafka
+
+allow_duplicates: false
+dependencies: []

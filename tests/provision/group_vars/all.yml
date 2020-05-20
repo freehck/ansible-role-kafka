@@ -1,0 +1,30 @@
+---
+zookeeper_nodes:
+  - host: k01
+    id: 1
+    bind_ip: "{{ hostvars['k01'].backnet_ip }}"
+    peerport: "2888"
+    leaderport: "3888"
+    clientport: "2181"
+  - host: k01
+    id: 2
+    bind_ip: "{{ hostvars['k01'].backnet_ip }}"
+    peerport: "12888"
+    leaderport: "13888"
+    clientport: "12181"
+  - host: k01
+    id: 3
+    bind_ip: "{{ hostvars['k01'].backnet_ip }}"
+    peerport: "22888"
+    leaderport: "23888"
+    clientport: "22181"
+
+kafka_zookeeper_addr: "{% for node in zookeeper_nodes %}{{ node.bind_ip | default( hostvars[node.host].zookeeper_bind_ip ) }}:{{ node.clientport | default( hostvars[node.host].zookeeper_clientport ) }}{% if not loop.last %},{% endif %}{% endfor %}"
+
+kafka_nodes:
+  - host: k01
+    id: 1
+    port: "9092"
+  - host: k01
+    id: 2
+    port: "19092"

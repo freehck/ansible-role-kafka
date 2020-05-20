@@ -1,0 +1,8 @@
+---
+
+- name: create node
+  include_tasks: node.yml
+  loop: "{{ kafka_nodes }}"
+  loop_control:
+    loop_var: kafka_node
+  when: kafka_node.host == inventory_hostname
