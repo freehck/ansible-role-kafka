@@ -24,3 +24,5 @@ kafka_env_file: "{{ kafka_srv_dir }}/env"
 
 kafka_id: "{{ kafka_node.id }}"
 # kafka_zookeeper_addr: ""
+
+# kafka_advertised_listeners: "k01://10.100.20.200:9092,k02://10.100.20.200:19092"

@@ -25,6 +25,10 @@ kafka_nodes:
   - host: k01
     id: 1
     port: "9092"
+    bind_ip: "{{ backnet_ip }}"
   - host: k01
     id: 2
     port: "19092"
+    bind_ip: "{{ backnet_ip }}"
+
+kafka_advertised_listeners: "{% for node in kafka_nodes %}node{{ node.id }}://{{ node.bind_ip | default( hostvars[node.host].kafka_bind_ip ) }}:{{ node.port | default( kafka.port ) }}{% if not loop.last %},{% endif %}{% endfor %}"
