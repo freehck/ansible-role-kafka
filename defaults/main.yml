@@ -1,6 +1,6 @@
 ---
 kafka_ct_name: "kafka-{{ kafka_id }}"
-kafka_ct_image: "confluent/kafka"
+kafka_ct_image: "confluentinc/cp-kafka:latest"
 kafka_bind_ip: "{{ kafka_node.bind_ip | default(backnet_ip) }}"
 kafka_port: "{{ kafka_node.port | default(9092) }}"
 
@@ -24,3 +24,5 @@ kafka_env_file: "{{ kafka_srv_dir }}/env"
 
 kafka_id: "{{ kafka_node.id }}"
 # kafka_zookeeper_addr: ""
+
+# kafka_advertised_listeners: "k01://10.100.20.200:9092,k02://10.100.20.200:19092"
